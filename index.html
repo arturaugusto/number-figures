@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style type="text/css">
+    body {
+      font-family: monospace;
+      font-size: 20px;
+    }
+    
+    div {
+      padding: 2px;
+    }
+
+    .pass {
+      background: green;
+    }
+
+    .fail {
+      background: red;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="resultDiv">
+    
+  </div>
+<script type="module">
+  import * as Module from './number-figures.js'
+  let inputExpected = [
+    ['toFigures', [1.23, 5], '1.2300'],
+    ['toFigures', ['0.0023e3', 5], '2.3000'],
+    ['toFigures', ['0.0023e3', 2], '2.3'],
+    ['toFigures', ['0.0023', 3], '0.00230'],
+    ['toFigures', ['0.00236', 2], '0.0024'],
+    ['toFigures', ['0.00232', 2], '0.0023'],
+    ['toFigures', ['-0.0023e3', 2], '-2.3'],
+    ['toFigures', ['0.0023e3', 1], '2'],
+    ['toFigures', ['0.0023e3', 10], '2.300000000'],
+    ['toFigures', ['0.0023', 10], '0.002300000000'],
+    ['toFigures', ['1234.567', 10], '1234.567000'],
+    ['toFigures', ['1234.567', 1], '1000'],
+    ['toFigures', ['1734.567', 1], '2000'],
+
+
+    ['getResolution', ['1734.567'], 3],
+    ['getResolution', ['1.5670000'], 7],
+    ['getResolution', ['-1.5670000'], 7],
+    ['getResolution', ['1123132'], 0],
+
+    ['getResolution', ['1.1212313e2'], 5],
+    ['getResolution', ['-1.1212313e2'], 5],
+    ['getResolution', ['-1.1212313E2'], 5],
+    
+
+
+  ].forEach(item => {
+    let div = document.createElement('div')
+    let span1 = document.createElement('span')
+    let span2 = document.createElement('span')
+
+    let [func, input, expected] = item
+    let result = Module[func](...input)
+    span1.innerText = `${func}(${input.toString()}) = `
+    span2.innerText = result
+    
+    div.appendChild(span1)
+    div.appendChild(span2)
+    
+    if (expected === result) {
+      div.classList.add('pass')
+    } else {
+      div.classList.add('fail')
+    }
+    document.getElementById('resultDiv').appendChild(div)
+
+  })
+  
+</script>
+
+</body>
+</html>
