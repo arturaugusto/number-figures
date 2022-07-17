@@ -13,3 +13,5 @@ toFigures(1234.567,1) === 1000
 getResolution(1.5670000) === 7
 getResolution(1123132) === 0
 ```
+
+Tests avaliable at: https://arturaugusto.github.io/number-figures/
